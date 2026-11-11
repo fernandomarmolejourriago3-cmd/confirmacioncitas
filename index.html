@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Confirmación de citas</title>
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: #F1F5F9;
+
+        min-height: 100vh;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .contenedor {
+        text-align: center;
+        padding: 30px;
+    }
+
+    .boton-confirmar {
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+
+        padding: 23px 45px;
+
+        background: linear-gradient(
+            135deg,
+            #087F8C,
+            #10B981
+        );
+
+        color: white;
+
+        border: none;
+        border-radius: 16px;
+
+        font-size: 21px;
+        font-weight: 700;
+
+        cursor: pointer;
+
+        box-shadow:
+            0 8px 25px rgba(16,185,129,0.30);
+
+        transition: all 0.3s ease;
+
+        text-decoration: none;
+    }
+
+    .boton-confirmar:hover {
+
+        transform: translateY(-4px);
+
+        box-shadow:
+            0 12px 30px rgba(16,185,129,0.40);
+
+        background: linear-gradient(
+            135deg,
+            #066875,
+            #059669
+        );
+    }
+
+    .boton-confirmar:active {
+        transform: scale(0.97);
+    }
+
+    .icono {
+        font-size: 30px;
+    }
+
+    .texto {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .texto small {
+        font-size: 12px;
+        font-weight: 400;
+        opacity: 0.9;
+    }
+
+</style>
+
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <a
+            class="boton-confirmar"
+
+            href="https://app.powerbi.com/view?r=eyJrIjoiMjIzMzVkYzItNjAxMS00ZjMyLTkzOWItMmVlNWFjY2QxODQwIiwidCI6ImIwMzY0YmM1LTNiZmUtNDg2NC1hMmVkLTNlYmI2OGM2MDhhZCIsImMiOjR9"
+
+            target="_blank"
+
+            rel="noopener noreferrer"
+        >
+
+            <span class="icono">📅</span>
+
+            <span class="texto">
+
+                CONFIRMAR MI CITA
+
+                <small>Haz clic para consultar y confirmar</small>
+
+            </span>
+
+            <span class="icono">✓</span>
+
+        </a>
+
+    </div>
+
+</body>
+</html>
