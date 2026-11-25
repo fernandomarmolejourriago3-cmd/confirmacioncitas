@@ -150,34 +150,6 @@
       border-color: var(--blue);
       box-shadow: 0 0 0 3px rgba(57, 133, 255, .14);
     }
-    /* Prefijo fijo del identificador */
-    .input-prefix-group {
-      display: flex;
-      width: 100%;
-      min-height: 48px;
-    }
-
-    .input-prefix {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 15px;
-      background: #eaf2ff;
-      color: #205a9e;
-      font-weight: 800;
-      font-size: 15px;
-      border: 1px solid #cbd5e1;
-      border-right: none;
-      border-radius: 9px 0 0 9px;
-      white-space: nowrap;
-    }
-
-    .input-prefix-group input {
-      border-radius: 0 9px 9px 0;
-      min-width: 0;
-      font-weight: 600;
-    }
-
     .field-help {
       display: block;
       margin-top: 6px;
@@ -284,20 +256,15 @@
         <div class="form-grid">
           <div>
             <label class="field-label" for="registroId">ID DEL REGISTRO</label>
-            <div class="input-prefix-group">
-              <span class="input-prefix">tsk--00</span>
-              <input
-                id="registroId"
-                name="id"
-                type="text"
-                placeholder="Ingrese los números"
-                maxlength="4"
-                inputmode="numeric"
-                pattern="[0-9]{4}"
-                autocomplete="off"
-                required>
-            </div>
-            <small class="field-help">Ingrese únicamente los últimos cuatro dígitos del identificador.</small>
+            <input
+              id="registroId"
+              name="id"
+              type="text"
+              placeholder="Ej.: tsk--001000"
+              maxlength="80"
+              autocomplete="off"
+              required>
+            <small class="field-help">Copie el ID que aparece en el informe de Power BI.</small>
           </div>
 
           <div>
@@ -340,35 +307,24 @@
     const button = document.getElementById("submitButton");
     const statusBox = document.getElementById("status");
 
-    const PREFIJO_ID = "tsk--00";
-
     form.addEventListener("submit", async function (event) {
       event.preventDefault();
 
-      const consecutivo = document.getElementById("registroId").value.trim();
+      const id = document.getElementById("registroId").value.trim();
       const confirmacion = document.getElementById("confirmacion").value;
 
       statusBox.className = "";
       statusBox.textContent = "";
 
-      if (!/^\d{4}$/.test(consecutivo)) {
+      if (!id || !confirmacion) {
         statusBox.className = "error";
-        statusBox.textContent = "El ID debe contener exactamente cuatro números.";
+        statusBox.textContent = "Complete el ID y seleccione una confirmación.";
         return;
       }
 
-      if (!confirmacion) {
-        statusBox.className = "error";
-        statusBox.textContent = "Seleccione un tipo de confirmación.";
-        return;
-      }
-
-      const id = PREFIJO_ID + consecutivo;
-
-      // Nombres exactos de los campos esperados por el flujo en la nube.
       const datos = {
-        "ID DE REGISTRO": id,
-        "TIPO DE CONFIRMACIÓN": confirmacion
+        "ID REGISTRO": id,
+        "CONFIRMACIÓN": confirmacion
       };
 
       button.disabled = true;
@@ -394,9 +350,8 @@
         }
 
         statusBox.className = "success";
-        statusBox.textContent = "✓ Solicitud enviada al flujo de Power Automate. ID: " + id;
+        statusBox.textContent = "✓ Solicitud enviada al flujo de Power Automate.";
         form.reset();
-
       } catch (error) {
         console.error("Error al enviar la confirmación:", error);
         statusBox.className = "error";
